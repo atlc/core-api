@@ -3,8 +3,11 @@ import * as passport from 'passport';
 import * as morgan from 'morgan';
 import * as compression from 'compression';
 import * as helmet from 'helmet';
+import * as cors from 'cors';
 
+import * as config from '../config';
 import './passport-strategies';
+
 
 export const configure = (app: express.Application) => {
     app.use(passport.initialize());
@@ -12,4 +15,11 @@ export const configure = (app: express.Application) => {
     app.use(morgan('dev'));
     app.use(helmet());
     app.use(compression());
+
+    app.use(cors({
+        "origin": config.cors.approvedDomains,
+        "methods": config.cors.methods,
+        "preflightContinue": false,
+        "optionsSuccessStatus": 204
+      }))
 }

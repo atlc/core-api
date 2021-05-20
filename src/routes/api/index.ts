@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { isRole, isUser } from '../../utils/permissions';
+import { isAdmin, isUser } from '../../utils/permissions';
 
 const router = Router();
 
@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
 });
 
 
-router.get('/status', (q,s,n) => isRole(q,s,n, 'admin'), (req, res) => {
+router.get('/status',isAdmin, (req, res) => {
     res.status(269).send('API is responding, auth service is responding');
 });
 
