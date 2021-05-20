@@ -24,23 +24,19 @@ const router = Router();
 //     })(req, res, next, role_type);
 // }
 
-
-
 export const isUser = (req: RequestUser, res: Response, next: NextFunction) => {
-    passport.authenticate('jwt', { session: false }, (err, user, info) => {
-        if (err) return next(err);
-        if (info) return res.status(401).json({ message: "There was an unknown error while authenticating, please try again.", error: info.message });
-        if (!user) return res.status(401).json({ message: "There was an unknown error while authenticating, please try again." });
-
-        if (user) req.user = user;
-
-        console.log(req.user);
-        return next();
-    })(req, res, next);
+    checkToken(req, res, next);
 }
 
-
 export const isAdmin = (req: RequestUser, res: Response, next: NextFunction) => {
+    checkToken(req, res, next, 'admin');
+}
+
+export const isSuperadmin = (req: RequestUser, res: Response, next: NextFunction) => {
+    checkToken(req, res, next, 'superadmin');
+}
+
+const checkToken = (req: RequestUser, res: Response, next: NextFunction, role: string = 'user') => {
     passport.authenticate('jwt', { session: false }, (err, user, info) => {
         if (err) return next(err);
         if (info) return res.status(401).json({ message: "There was an unknown error while authenticating, please try again.", error: info.message });
@@ -48,16 +44,14 @@ export const isAdmin = (req: RequestUser, res: Response, next: NextFunction) => 
 
         if (user) req.user = user;
 
-        if (!user.roles.includes('admin')) {
-            res.status(403).json({
+        if (!user.roles.includes(role)) {
+            return res.status(403).json({
                 message: "You have insufficient permissions to access this resource.",
                 current_roles: JSON.parse(user.roles),
-                required_role: 'admin'
+                required_role: role
             });
-            return;
         }
 
-        console.log(req.user);
-        return next();
+        next();
     })(req, res, next);
 }

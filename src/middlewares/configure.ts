@@ -21,5 +21,5 @@ export const configure = (app: express.Application) => {
         "methods": config.cors.methods,
         "preflightContinue": false,
         "optionsSuccessStatus": 204
-      }))
+      }));
 }

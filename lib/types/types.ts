@@ -24,5 +24,5 @@ export interface RequestUser extends Request {
 
 export interface HTTPError {
     message: string;
-    status: number;
+    status?: number;
 }

@@ -17,7 +17,7 @@ router.post('/', async (req, res, next) => {
             const { isPwned, breaches } = await validate(password);
 
             if (isPwned) {
-                throw new Error(`You cannot register with that password. It has been found in ${breaches} public breaches per HaveIBeenPwned.com`);
+                throw new Error(`You cannot register with that password. It has been found in ${breaches.toLocaleString()} public breaches per HaveIBeenPwned.com`);
             }
 
             newUser.id = uuid();
