@@ -18,3 +18,7 @@ export const jwt = {
     secret: process.env.JWT_SIGNATURE,
     expiration: process.env.JWT_EXPIRY
 }
+
+export const shopping_list = {
+    database: process.env.SHOPPING_DB
+}
