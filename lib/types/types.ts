@@ -26,3 +26,10 @@ export interface HTTPError {
     message: string;
     status?: number;
 }
+
+export interface ConnectionPoolConfig {
+    database: string;
+    host: string;
+    user: string;
+    password: string;
+}

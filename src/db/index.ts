@@ -1,15 +1,22 @@
 import * as mysql from 'mysql';
-import { mysql as mysqlConf } from '../config';
 import { MySQL_Res } from '../../lib/types';
+import { sqlConfig } from '../config'
 
-export const Query = <T = MySQL_Res>(query: string, dbname?: string, values?: any[]) => {
+const pools = mysql.createPoolCluster();
+pools.add('auth', sqlConfig.auth);
+pools.add('shopping', sqlConfig.shopping);
+
+export const Query = <T = MySQL_Res>(query: string, poolToUse: string, values?: any[]) => {
     return new Promise<T>((resolve, reject) => {
         const formattedSql = mysql.format(query, values);
         console.log({ formattedSql });
 
-        const pool = mysql.createPool({ ...mysqlConf, database: dbname || mysqlConf.database });
-        pool.query(formattedSql, (err, results) => {
-            err ? reject(err) : resolve(results)
+        pools.getConnection(poolToUse, (connErr, connection) => {
+            if (connErr) return reject(connErr);
+
+            connection.query(formattedSql, (err, results) => {
+                err ? reject(err) : resolve(results)
+            });
         });
     });
 }
