@@ -1,11 +1,13 @@
 import { Router } from 'express';
 import { isAdmin, isUser } from '../../utils/permissions';
+import { users } from '../../db';
 
 const router = Router();
 
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
     console.log(req.user)
-    res.send('api lol')
+    const test = await users.all();
+    res.send(test)
 });
 
 router.get('/status', isAdmin, (req, res) => {

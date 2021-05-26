@@ -3,8 +3,8 @@ import { MySQL_Res } from '../../lib/types';
 import { sqlConfig } from '../config'
 
 const pools = mysql.createPoolCluster();
-pools.add('auth', sqlConfig.auth);
-pools.add('shopping', sqlConfig.shopping);
+// @ts-ignore
+Object.keys(sqlConfig).forEach(conf => pools.add(`${conf}`, sqlConfig[`${conf}`]));
 
 export const Query = <T = MySQL_Res>(query: string, poolToUse: string, values?: any[]) => {
     return new Promise<T>((resolve, reject) => {

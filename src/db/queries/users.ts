@@ -1,7 +1,7 @@
 import { Query } from '../index';
 import { Users } from '../../../lib/types'
 
-export const all = () => Query<Users[]>('SELECT * FROM Users', 'auth');
+export const all = () => Query<Users[]>('SELECT * FROM Users', 'shopping');
 export const single = (id: Users['id']) => Query<Users[]>('SELECT * FROM Users WHERE id=?', 'auth', [id]);
 export const search_by = (column: string, value: string) => Query<Users[]>('SELECT * FROM Users WHERE ??=?', 'auth', [column, value]);
 

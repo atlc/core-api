@@ -8,7 +8,7 @@ export const cors = {
     methods: process.env.CORS_APPROVED_METHODS
 }
 
-export const sqlConfig: { [key: string]: ConnectionPoolConfig } = {
+export const sqlConfig = {
     auth: {
         database: process.env.AUTH_DB_SCHEMA,
         host: process.env.AUTH_DB_HOST,
@@ -16,7 +16,7 @@ export const sqlConfig: { [key: string]: ConnectionPoolConfig } = {
         password: process.env.AUTH_DB_PASS
     },
     shopping: {
-        database: process.env.SHOPPING_DB,
+        database: process.env.SHOPPING_DB_SCHEMA,
         host: process.env.SHOPPING_DB_HOST,
         user: process.env.SHOPPING_DB_USER,
         password: process.env.SHOPPING_DB_PASS
