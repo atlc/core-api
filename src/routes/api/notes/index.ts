@@ -69,7 +69,7 @@ router.delete('/:id', isUser, async (req: RequestUser, res, next) => {
         if (results.sqlMessage) throw new Error(`Database error:\t${results.sqlMessage}`);
 
         if (results.affectedRows === 1) {
-            res.status(204).json({ message: 'The note was successfully deleted.' });
+            res.sendStatus(204);
         } else {
             res.status(404).json({ message: 'No resource with that ID exists.' });
         }
