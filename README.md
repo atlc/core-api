@@ -1,4 +1,4 @@
 # Integrations to add
 
-- Shopping List API
+- Notes App
     - Frontend - Markdown Parser, Draggable Wrapper (`react-draggable`), Modal/Toasts

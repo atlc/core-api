@@ -22,3 +22,4 @@ export const Query = <T = MySQL_Res>(query: string, poolToUse: string, values?: 
 }
 
 export * as users from './queries/users';
+export * as notes from './queries/notes';

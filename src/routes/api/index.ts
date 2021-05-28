@@ -1,17 +1,16 @@
 import { Router } from 'express';
-import { isAdmin, isUser } from '../../utils/permissions';
-import { users } from '../../db';
+import { RequestUser } from '../../../lib/types';
+import { isUser } from '../../utils/permissions';
+import notesRouter from './notes';
 
 const router = Router();
 
-router.get('/', async (req, res) => {
-    console.log(req.user)
-    const test = await users.all();
-    res.send(test)
+router.get('/coffee', (req, res) => res.sendStatus(418));
+
+router.get('/status', isUser, (req: RequestUser, res) => {
+    res.status(200).json({ message: 'API is responding, auth service is responding' })
 });
 
-router.get('/status', isAdmin, (req, res) => {
-    res.status(269).send('API is responding, auth service is responding');
-});
+router.use('/notes', notesRouter);
 
 export default router;
