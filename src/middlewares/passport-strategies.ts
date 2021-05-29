@@ -24,6 +24,8 @@ passport.use(new PassportLocal.Strategy({
         const isEmail = emailRegex.test(email.toLocaleLowerCase());
 
         const [user] = await db.users.search_by(isEmail ? 'email' : 'username', email);
+        if (!user) throw new Error('Cannot log in - user with that username or email does not exist.')
+
         const passwordsMatch = await passwords.verify(password, user.hashed);
 
         if (user && passwordsMatch) {
