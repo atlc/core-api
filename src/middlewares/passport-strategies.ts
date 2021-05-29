@@ -18,6 +18,7 @@ passport.use(new PassportLocal.Strategy({
     usernameField: 'email',
     session: false
 }, async (email, password, done) => {
+    console.log({ location: 'passport, localstrategy', email })
     try {
         /* Validate if a user is logging in with either email or username */
         const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
