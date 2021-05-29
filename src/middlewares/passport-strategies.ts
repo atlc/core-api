@@ -5,6 +5,7 @@ import * as PassportJWT from 'passport-jwt';
 import * as db from '../db';
 import { jwt as jwt_conf } from '../config';
 import { tokens, passwords } from '../utils/security';
+import { checkIfValid } from '../utils/isEmail';
 import { TokenPayload, Users } from '../../lib/types';
 
 passport.serializeUser((user: Users, done) => {
@@ -21,8 +22,7 @@ passport.use(new PassportLocal.Strategy({
     console.log({ location: 'passport, localstrategy', email })
     try {
         /* Validate if a user is logging in with either email or username */
-        const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-        const isEmail = emailRegex.test(email.toLocaleLowerCase());
+        const isEmail = checkIfValid(email);
 
         const [user] = await db.users.search_by(isEmail ? 'email' : 'username', email);
         if (!user) throw new Error('Cannot log in - user with that username or email does not exist.')
