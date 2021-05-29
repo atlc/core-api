@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { RequestUser } from '../../../lib/types';
 import { isUser } from '../../utils/permissions';
 import notesRouter from './notes';
+import usersRouter from './users';
 
 const router = Router();
 
@@ -12,5 +13,6 @@ router.get('/status', isUser, (req: RequestUser, res) => {
 });
 
 router.use('/notes', notesRouter);
+router.use('/users', usersRouter);
 
 export default router;
