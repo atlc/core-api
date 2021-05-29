@@ -37,7 +37,7 @@ router.post('/', isUser, async (req: RequestUser, res, next) => {
         if (!content) return res.status(400).json({ message: "Note contents must not be empty" });
 
         const results = await notes.create_note({ id, user_id, content });
-        // if (results.sqlMessage) throw new Error(`Database error:\t${results.sqlMessage}`);
+        if (results.sqlMessage) throw new Error(`Database error:\t${results.sqlMessage}`);
         res.status(201).json({ message: 'The note was successfully created!', id });
     } catch (error) {
         next(error);
@@ -53,7 +53,7 @@ router.put('/:id', isUser, async (req: RequestUser, res, next) => {
         if (!content) return res.status(400).json({ message: "Note contents must not be empty" });
 
         const results = await notes.update_note({ content, id: note_id, user_id });
-        // if (results.sqlMessage) throw new Error(`Database error:\t${results.sqlMessage}`);
+        if (results.sqlMessage) throw new Error(`Database error:\t${results.sqlMessage}`);
         res.status(201).json({ message: 'The note was successfully updated!' });
     } catch (error) {
         next(error);
