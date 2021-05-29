@@ -9,7 +9,7 @@ Object.keys(sqlConfig).forEach(conf => pools.add(`${conf}`, sqlConfig[`${conf}`]
 export const Query = <T = MySQL_Res>(query: string, poolToUse: string, values?: any[]) => {
     return new Promise<T>((resolve, reject) => {
         const formattedSql = mysql.format(query, values);
-        console.log({ formattedSql });
+        console.log({ SQL: `\n${formattedSql}\n` });
 
         pools.getConnection(poolToUse, (connErr, connection) => {
             if (connErr) return reject(connErr);

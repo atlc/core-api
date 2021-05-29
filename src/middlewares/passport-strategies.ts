@@ -19,7 +19,6 @@ passport.use(new PassportLocal.Strategy({
     usernameField: 'email',
     session: false
 }, async (email, password, done) => {
-    console.log({ location: 'passport, localstrategy', email })
     try {
         /* Validate if a user is logging in with either email or username */
         const isEmail = checkIfValid(email);
