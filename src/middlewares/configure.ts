@@ -4,8 +4,6 @@ import * as morgan from 'morgan';
 import * as compression from 'compression';
 import * as helmet from 'helmet';
 import * as cors from 'cors';
-
-import * as config from '../config';
 import './passport-strategies';
 
 
@@ -16,16 +14,6 @@ export const configure = (app: express.Application) => {
   app.use(helmet());
   app.use(compression());
 
-  // const corsOptionsDelegation = (req: any, callback: any) => {
-  //   const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-  //   const corsOptions = {
-  //     methods: config.cors.methods,
-  //     preflightContinue: false,
-  //     optionsSuccessStatus: 204,
-  //     origin: (config.cors.approvedDomains.includes(req.header('Origin') || ip))
-  //   }
-  //   callback(null, corsOptions);
-  // }
-
-  // app.use(cors(corsOptionsDelegation));
+  app.use(cors());
+  app.options('*', cors());
 }
