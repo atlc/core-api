@@ -16,14 +16,16 @@ router.post('/', async (req, res, next) => {
         const { username, email, password } = newUser;
 
         if (username && email && password) {
-            if (username.length > 24 || email.length > 64 || password.length > 72) throw new Error('Registration fields must not be longer than the count specified below.');
+            if (username.length > 24 || email.length > 64 || password.length > 72) {
+                throw new Error('Registration fields must not be longer than the count specified below.');
+            }
 
             const { isPwned, breaches } = await validate(password);
             if (isPwned) {
                 throw new Error(`You cannot register with that password. It has been found in ${breaches.toLocaleString()} public breaches per HaveIBeenPwned.com`);
             }
 
-            if (!checkIfValid(email)) throw new Error('Registration fields must not be longer than the count specified below.');
+            if (!checkIfValid(email)) throw new Error('Must be a valid email address.');
 
             newUser.id = uuid();
             newUser.hashed = await pw.slinging_slasher(password);
