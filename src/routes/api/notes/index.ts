@@ -10,8 +10,7 @@ router.get('/profile', isUser, async (req: RequestUser, res, next) => {
     try {
         const user_id = req.user.id;
         const user_notes = await notes.get_notes_by_user(user_id);
-        const previews = user_notes.map(note => ({ ...note, content: note.content.substring(0, 300) }));
-        res.json(previews);
+        res.json(user_notes);
     } catch (error) {
         next(error);
     }
