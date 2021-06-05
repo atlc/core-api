@@ -8,4 +8,4 @@ export const pin = (id: string, user_id: string, pinned: string) =>  Query('UPDA
 
 export const create_note = (new_note: Note) => Query('INSERT INTO Notes SET ?', 'notes', [new_note]);
 export const update_note = ({ content, id, user_id }: Note) => Query('UPDATE Notes SET content=? WHERE id=? AND user_id=?', 'notes', [content, id, user_id]);
-export const destroy_note = (id: string, user_id: string) => Query('DELETE FROM notes WHERE id=? AND user_id=?', 'notes', [id, user_id]);
+export const destroy_note = (id: string, user_id: string) => Query('DELETE FROM Notes WHERE id=? AND user_id=?', 'notes', [id, user_id]);
