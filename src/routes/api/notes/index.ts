@@ -44,6 +44,21 @@ router.post('/', isUser, async (req: RequestUser, res, next) => {
     }
 });
 
+router.put('/pin/:id/:pinned', isUser, async (req: RequestUser, res, next) => {
+    try {
+        const { id, pinned } = req.params;
+        const user_id = req.user.id;
+
+        if (!id || !pinned) return res.status(400).json({ message: "Must have ID and Pinned params" });
+
+        const results = await notes.pin(pinned, id, user_id);
+        if (results.sqlMessage) throw new Error(`Database error:\t${results.sqlMessage}`);
+        res.status(201).json({ message: 'The note was successfully updated!' });
+    } catch (error) {
+        next(error);
+    }
+});
+
 router.put('/:id', isUser, async (req: RequestUser, res, next) => {
     try {
         const note_id = req.params.id;
@@ -59,6 +74,7 @@ router.put('/:id', isUser, async (req: RequestUser, res, next) => {
         next(error);
     }
 });
+
 
 router.delete('/:id', isUser, async (req: RequestUser, res, next) => {
     try {
