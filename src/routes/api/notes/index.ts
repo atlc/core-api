@@ -50,7 +50,7 @@ router.put('/pin/:id/:pinned', isUser, async (req: RequestUser, res, next) => {
 
         if (!id || !pinned) return res.status(400).json({ message: "Must have ID and Pinned params" });
 
-        const results = await notes.pin(pinned, id, user_id);
+        const results = await notes.pin(id, user_id, pinned);
         if (results.sqlMessage) throw new Error(`Database error:\t${results.sqlMessage}`);
         res.status(201).json({ message: 'The note was successfully updated!' });
     } catch (error) {
