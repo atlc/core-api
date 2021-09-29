@@ -1,5 +1,5 @@
-import * as express from 'express';
-import { configure, set_routes } from './middlewares';
+import * as express from "express";
+import { configure, set_routes } from "./middlewares";
 
 const app = express();
 

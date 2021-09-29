@@ -8,6 +8,13 @@ export const cors = {
     methods: process.env.CORS_APPROVED_METHODS
 };
 
+export const mailgunConfig = {
+    // username: process.env.MAILGUN_USERNAME,
+    username: "api",
+    key: process.env.MAILGUN_KEY,
+    domain: process.env.MAILGUN_DOMAIN
+};
+
 export const sqlConfig: DBClusterConfig = {
     auth: {
         database: process.env.AUTH_DB_SCHEMA,
