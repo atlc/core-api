@@ -14,7 +14,7 @@ router.get("/status", isUser, (req: RequestUser, res) => {
     res.status(200).json({ message: "API is responding, auth service is responding" });
 });
 
-router.use("/notes", notesRouter);
+router.use("/notes", isUser, notesRouter);
 router.use("/users", usersRouter);
 router.use("/contact", contactRouter);
 router.use("/kindle", kindleRouter);
