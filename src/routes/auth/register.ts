@@ -50,12 +50,14 @@ router.post("/", async (req, res, next) => {
                     user_id: newUser.id
                 });
 
+                const URL_BASE = req.protocol + "://" + req.get("host");
+
                 send(
                     email,
                     "<MyBackendLol>registration@test.io",
                     "Please Click Link plz plz plzzzzz",
                     `
-                    localhost:3000/verify?userid=${newUser.id}&token=${registration_token}
+                    ${URL_BASE}/verify?userid=${newUser.id}&token=${registration_token}
                 `
                 );
 
