@@ -7,9 +7,10 @@ export interface Users {
     roles: string; // JSON stringified array of strings
     avatar?: string;
     visible: number;
+    verified: number;
     created_at: string;
     updated_at: string;
-};
+}
 
 export interface Note {
     id: string;
@@ -20,7 +21,6 @@ export interface Note {
     pinned?: number;
 }
 
-
 export interface MySQL_Error {
     code?: string;
     errno?: number;
@@ -28,7 +28,7 @@ export interface MySQL_Error {
     sqlState?: string;
     index?: number;
     sql?: string;
-};
+}
 
 export interface MySQL_Success {
     fieldCount?: number;
@@ -39,6 +39,6 @@ export interface MySQL_Success {
     message?: string;
     protocol41?: boolean;
     changedRows?: number;
-};
+}
 
 export type MySQL_Res = MySQL_Error & MySQL_Success;

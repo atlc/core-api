@@ -1,12 +1,19 @@
 import * as express from "express";
-
 import * as db from "../../db";
 
 const router = express.Router();
 
-router.put("/verify", async (req, res) => {
+interface ReqWithQueryParams extends express.Request {
+    query: {
+        userid: string;
+        token: string;
+    };
+}
+
+router.put("/verify", async (req: ReqWithQueryParams, res) => {
     try {
-        const { userid, token } = req.query;
+        const { token, userid } = req.query;
+
         const db_token = await db.auth.get_auth_token(token);
 
         if (!db_token) {
@@ -29,7 +36,7 @@ router.put("/verify", async (req, res) => {
             return;
         }
 
-        const user = await db.users.single(userid);
+        const [user] = await db.users.single(userid);
         await db.users.update(userid, { ...user, verified: 1 });
         await db.auth.invalidate(token);
 

@@ -9,8 +9,8 @@ export const cors = {
 };
 
 export const mailgunConfig = {
-    // username: process.env.MAILGUN_USERNAME,
-    username: "api",
+    username: process.env.MAILGUN_USERNAME,
+    email: process.env.MAILGUN_EMAIL,
     key: process.env.MAILGUN_KEY,
     domain: process.env.MAILGUN_DOMAIN
 };
@@ -33,4 +33,9 @@ export const sqlConfig: DBClusterConfig = {
 export const jwt = {
     secret: process.env.JWT_SIGNATURE,
     expiration: process.env.JWT_EXPIRY
+};
+
+export const kindle = {
+    to: process.env.KINDLE_ADDRESS,
+    from: process.env.KINDLE_APPROVED
 };

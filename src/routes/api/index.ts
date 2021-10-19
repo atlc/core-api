@@ -4,6 +4,7 @@ import { isUser } from "../../utils/permissions";
 import notesRouter from "./notes";
 import usersRouter from "./users";
 import contactRouter from "./contact";
+import kindleRouter from "./kindle";
 
 const router = Router();
 
@@ -16,5 +17,6 @@ router.get("/status", isUser, (req: RequestUser, res) => {
 router.use("/notes", notesRouter);
 router.use("/users", usersRouter);
 router.use("/contact", contactRouter);
+router.use("/kindle", kindleRouter);
 
 export default router;
