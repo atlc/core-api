@@ -54,7 +54,7 @@ router.post("/", async (req, res, next) => {
 
                 send(
                     email,
-                    "<MyBackendLol>registration@test.io",
+                    "registration@atlc.dev",
                     "Please Click Link plz plz plzzzzz",
                     `
                     ${URL_BASE}/verify?userid=${newUser.id}&token=${registration_token}

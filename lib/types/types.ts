@@ -5,6 +5,7 @@ import * as core from "express-serve-static-core";
 export interface TokenPayload {
     id?: Users["id"];
     roles?: Users["roles"];
+    isVerified?: Users["verified"];
 }
 
 export interface ExtensibleHandler<

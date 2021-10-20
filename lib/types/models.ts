@@ -21,6 +21,13 @@ export interface Note {
     pinned?: number;
 }
 
+export interface Bill {
+    id: string;
+    type: "internet" | "gas" | "electric" | "water";
+    amount: number;
+    payment_date: Date | string;
+}
+
 export interface MySQL_Error {
     code?: string;
     errno?: number;

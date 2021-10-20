@@ -10,11 +10,13 @@ interface ReqWithQueryParams extends express.Request {
     };
 }
 
-router.put("/verify", async (req: ReqWithQueryParams, res) => {
+router.get("/", async (req: ReqWithQueryParams, res) => {
     try {
         const { token, userid } = req.query;
 
-        const db_token = await db.auth.get_auth_token(token);
+        const [db_token] = await db.auth.get_auth_token(token);
+
+        console.log({ token, userid, db_token });
 
         if (!db_token) {
             res.status(400).json({ message: "Invalid credentials" });
@@ -22,11 +24,6 @@ router.put("/verify", async (req: ReqWithQueryParams, res) => {
         }
 
         if (Date.now() > db_token.expires_at) {
-            res.status(400).json({ message: "Invalid credentials" });
-            return;
-        }
-
-        if (db_token.is_used) {
             res.status(400).json({ message: "Invalid credentials" });
             return;
         }
@@ -45,3 +42,5 @@ router.put("/verify", async (req: ReqWithQueryParams, res) => {
         res.status(500).json({ error: these_hands });
     }
 });
+
+export default router;
