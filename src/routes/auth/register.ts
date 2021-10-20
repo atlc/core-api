@@ -2,13 +2,11 @@ import { Router } from "express";
 import { v4 as uuid } from "uuid";
 import { validate } from "@atlc/hibp";
 import { Users } from "../../../lib/types";
-import { passwords as pw, tokens } from "../../utils/security";
+import { passwords as pw } from "../../utils/security";
 import { checkIfValid } from "../../utils/isEmail";
-import { send } from "../../services/mailer";
 
 import * as db from "../../db";
-
-const TWO_HOUR_LIMIT = 7200000;
+import { send_confirmation_email } from "../../services/registration_confirmation";
 
 const router = Router();
 
@@ -42,24 +40,7 @@ router.post("/", async (req, res, next) => {
             if (add.errno) {
                 throw new Error(add.sqlMessage);
             } else {
-                const registration_token = uuid();
-                await db.auth.create_auth_token({
-                    id: registration_token,
-                    created_at: Date.now(),
-                    expires_at: Date.now() + TWO_HOUR_LIMIT,
-                    user_id: newUser.id
-                });
-
-                const URL_BASE = req.protocol + "://" + req.get("host");
-
-                send(
-                    email,
-                    "registration@atlc.dev",
-                    "Please Click Link plz plz plzzzzz",
-                    `
-                    ${URL_BASE}/auth/verify?userid=${newUser.id}&token=${registration_token}
-                `
-                );
+                send_confirmation_email(newUser.id, email);
 
                 res.status(201).json({
                     message: "The user was successfully created! Please check your email to verify the user",
