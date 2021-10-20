@@ -57,7 +57,7 @@ router.post("/", async (req, res, next) => {
                     "registration@atlc.dev",
                     "Please Click Link plz plz plzzzzz",
                     `
-                    ${URL_BASE}/verify?userid=${newUser.id}&token=${registration_token}
+                    ${URL_BASE}/auth/verify?userid=${newUser.id}&token=${registration_token}
                 `
                 );
 

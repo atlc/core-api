@@ -49,7 +49,7 @@ passport.use(
                         "registration@atlc.dev",
                         "Please Confirm Your Account",
                         `
-                        ${URL_BASE}/verify?userid=${user.id}&token=${registration_token}
+                        ${URL_BASE}/auth/verify?userid=${user.id}&token=${registration_token}
                     `
                     );
 
