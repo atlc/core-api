@@ -17,7 +17,7 @@ router.post("/", async (req, res, next) => {
         const { username, email, password } = newUser;
 
         if (username && email && password) {
-            if (username.length > 24 || email.length > 64 || password.length > 72) {
+            if (username.length > 24 || email.length > 64) {
                 throw new Error("Registration fields must not be longer than the count specified below.");
             }
 

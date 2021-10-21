@@ -3,12 +3,10 @@ import * as PassportLocal from "passport-local";
 import * as PassportJWT from "passport-jwt";
 
 import * as db from "../db";
-import { jwt as jwt_conf, URL_BASE } from "../config";
-import { tokens, passwords } from "../utils/security";
+import { jwt as jwt_conf } from "../config";
+import { passwords } from "../utils/security";
 import { checkIfValid } from "../utils/isEmail";
 import { TokenPayload, Users } from "../../lib/types";
-import { send } from "../services/mailer";
-import { v4 as uuid } from "uuid";
 import { send_confirmation_email } from "../services/registration_confirmation";
 
 passport.serializeUser((user: Users, done) => {

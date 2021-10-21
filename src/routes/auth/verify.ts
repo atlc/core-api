@@ -1,6 +1,7 @@
 import * as express from "express";
 import * as db from "../../db";
 import { send_confirmation_email } from "../../services/registration_confirmation";
+import { validate_token } from "../../services/token_validator";
 
 const router = express.Router();
 
@@ -15,25 +16,16 @@ router.get("/", async (req: ReqWithQueryParams, res) => {
     try {
         const { token, userid } = req.query;
 
-        const [db_token] = await db.auth.get_auth_token(token);
         const [user] = await db.users.single(userid);
 
-        console.log({ token, userid, db_token });
+        const checked_token = await validate_token(userid, token);
 
-        if (!db_token) {
-            res.status(400).json({ message: "Token expired or doesn't exist" });
-            return;
-        }
-
-        if (userid !== db_token.user_id || !user) {
-            res.status(400).json({ message: "Invalid credentials" });
-            return;
-        }
-
-        if (Date.now() > db_token.expires_at) {
-            send_confirmation_email(userid, user.email);
-            res.status(400).json({ message: "That token has expired, please ABSTRACT REGISTER TOKEN TO FUNCTION AND USE HERE TOO" });
-            return;
+        if (!checked_token.is_valid) {
+            if (checked_token.rejection_reason.toLowerCase().includes("expired")) {
+                await db.auth.clear_all_for_user(userid);
+                send_confirmation_email(user.id, user.email);
+            }
+            return res.status(400).json({ message: checked_token.rejection_reason });
         }
 
         await db.users.update(userid, { ...user, verified: 1 });

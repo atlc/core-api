@@ -5,7 +5,13 @@ import { URL_BASE } from "../config";
 
 const TWO_HOUR_LIMIT = 7200000;
 
-export const send_confirmation_email = async (userid: string, email: string) => {
+export const send_confirmation_email = async (
+    userid: string,
+    email: string,
+    from: string = "registration@atlc.dev",
+    subject: string = "Please Confirm Your Account",
+    url_path: string = "verify"
+) => {
     const registration_token = uuid();
 
     await db.auth.clear_all_for_user(userid);
@@ -17,10 +23,5 @@ export const send_confirmation_email = async (userid: string, email: string) => 
         user_id: userid
     });
 
-    send(
-        email,
-        "registration@atlc.dev",
-        "Please Confirm Your Account",
-        `${URL_BASE}/auth/verify?userid=${userid}&token=${registration_token}`
-    );
+    send(email, from, subject, `${URL_BASE}/auth/${url_path}/?userid=${userid}&token=${registration_token}`);
 };
