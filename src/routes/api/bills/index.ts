@@ -1,10 +1,11 @@
 import { Router } from "express";
 import { Bills } from "../../../utils/types";
 import * as db from "../../../db";
+import { isAdmin } from "../../../utils/permissions";
 
 const router = Router();
 
-router.post("/", async (req, res, next) => {
+router.post("/", isAdmin, async (req, res, next) => {
     const { type_id, amount, payment_date }: Bills = req.body;
 
     if (!type_id || !amount || !payment_date) return res.status(400).json({ message: "Make sure you've got all fields filled out!" });
@@ -26,7 +27,7 @@ router.get("/types", async (req, res, next) => {
     }
 });
 
-router.get("/", async (req, res, next) => {
+router.get("/", isAdmin, async (req, res, next) => {
     try {
         const bills = await db.bills.get_all();
         res.status(200).json(bills);
