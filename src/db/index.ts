@@ -16,6 +16,7 @@ export const Query = <T = MySQL_Res>(query: string, poolToUse: string, values?: 
             console.log({ DB: `Cluster connected to ::${poolToUse}:: with thread ID ::${connection.threadId}::` });
 
             connection.query(formattedSql, (err, results) => {
+                connection.release();
                 err ? reject(err) : resolve(results);
             });
         });

@@ -16,7 +16,10 @@ router.get("/status", (req: RequestUser, res) => {
 });
 
 router.get("/status/auth", isUser, (req: RequestUser, res) => {
-    res.status(200).json({ message: "API is responding, auth service is responding" });
+    res.status(200).json({
+        message: "API is responding, auth service is responding",
+        current_user_info: { id: req.user, roles: req.user.roles }
+    });
 });
 
 router.use("/notes", notesRouter);
