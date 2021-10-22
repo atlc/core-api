@@ -1,0 +1,10 @@
+-- Notes App DB;
+
+CREATE TABLE Notes (
+    id CHAR(36) NOT NULL PRIMARY KEY,
+    user_id CHAR(36) NOT NULL,
+    content VARCHAR(2000) NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME ON UPDATE CURRENT_TIMESTAMP,
+    pinned TINYINT DEFAULT 0
+);

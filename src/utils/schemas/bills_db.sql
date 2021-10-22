@@ -1,6 +1,4 @@
 -- Utility Bills DB;
-CREATE DATABASE LocalCoreAPI_Utilities;
-
 DROP TABLE IF EXISTS BillTypes;
 CREATE TABLE BillTypes (
 	id INT AUTO_INCREMENT PRIMARY KEY,

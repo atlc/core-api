@@ -1,10 +1,4 @@
 -- Auth DB;
-SELECT * FROM Users;
-SELECT * FROM Tokens;
-
-DELETE FROM Users where id IS NOT NULL;
-DELETE FROM Tokens where id IS NOT NULL;
-
 DROP TABLE IF EXISTS Tokens;
 DROP TABLE IF EXISTS Users;
 
@@ -28,7 +22,3 @@ CREATE TABLE Tokens (
     user_id CHAR(36) NOT NULL,
     FOREIGN KEY (user_id) REFERENCES Users(id)
 );
-
-SELECT username, verified FROM Users;
-SELECT u.username, u.verified, t.* FROM Tokens t JOIN Users u on t.user_id=u.id;
-SELECT * FROM Tokens where id='3d2c4525-12c3-4f15-accb-5ac362dc2466';
