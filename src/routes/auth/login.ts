@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { authenticate } from "passport";
-import { RequestUser } from "../../../lib/types";
+import { RequestUser } from "../../utils/types";
 import { tokens } from "../../utils/security";
 
 const router = Router();

@@ -21,11 +21,17 @@ export interface Note {
     pinned?: number;
 }
 
-export interface Bill {
-    id: string;
-    type: "internet" | "gas" | "electric" | "water";
+export interface Bills {
+    id?: number;
+    utility_name?: string;
+    type_id?: BillTypes["id"];
     amount: number;
     payment_date: Date | string;
+}
+
+export interface BillTypes {
+    id: number;
+    name: "internet" | "gas" | "electric" | "water";
 }
 
 export interface MySQL_Error {

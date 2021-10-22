@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { v4 as uuid } from "uuid";
 import { validate } from "@atlc/hibp";
-import { Users } from "../../../lib/types";
+import { Users } from "../../utils/types";
 import { passwords as pw } from "../../utils/security";
 import { checkIfValid } from "../../utils/isEmail";
 

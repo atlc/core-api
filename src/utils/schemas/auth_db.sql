@@ -1,4 +1,6 @@
 -- Auth DB;
+SELECT * FROM Users;
+SELECT * FROM Tokens;
 
 DELETE FROM Users where id IS NOT NULL;
 DELETE FROM Tokens where id IS NOT NULL;

@@ -6,7 +6,7 @@ import * as db from "../db";
 import { jwt as jwt_conf } from "../config";
 import { passwords } from "../utils/security";
 import { checkIfValid } from "../utils/isEmail";
-import { TokenPayload, Users } from "../../lib/types";
+import { TokenPayload, Users } from "../utils/types";
 import { send_confirmation_email } from "../services/registration_confirmation";
 
 passport.serializeUser((user: Users, done) => {

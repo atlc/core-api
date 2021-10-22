@@ -1,11 +1,11 @@
-import e, { Router } from 'express';
-import { RequestUser, Users } from '../../../../lib/types';
-import { isUser } from '../../../utils/permissions';
-import { users } from '../../../db'
+import e, { Router } from "express";
+import { RequestUser, Users } from "../../../utils/types";
+import { isUser } from "../../../utils/permissions";
+import { users } from "../../../db";
 
 const router = Router();
 
-router.get('/profile/:id', isUser, async (req: RequestUser, res, next) => {
+router.get("/profile/:id", isUser, async (req: RequestUser, res, next) => {
     try {
         const user_id_params = req.params.id;
         const user_id_token = req.user.id;
@@ -14,9 +14,9 @@ router.get('/profile/:id', isUser, async (req: RequestUser, res, next) => {
             const [user] = await users.single(user_id_token);
             delete user.hashed;
             delete user.visible;
-            res.json(user)
+            res.json(user);
         } else {
-            throw new Error(`You are not permitted to view others' profiles.`)
+            throw new Error(`You are not permitted to view others' profiles.`);
         }
     } catch (error) {
         next(error);

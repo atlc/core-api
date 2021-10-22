@@ -1,6 +1,6 @@
 import * as bcrypt from "bcrypt";
 import * as jwt from "jsonwebtoken";
-import { TokenPayload } from "../../lib/types";
+import { TokenPayload } from "../utils/types";
 import { jwt as jwt_config } from "../config";
 
 const /*hash_*/ slinging_slasher = async (password: string) => {

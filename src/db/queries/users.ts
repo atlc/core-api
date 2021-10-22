@@ -1,5 +1,5 @@
 import { Query } from "../index";
-import { Users } from "../../../lib/types";
+import { Users } from "../../utils/types";
 
 export const all = () => Query<Users[]>("SELECT * FROM Users", "auth");
 export const single = (id: Users["id"]) => Query<Users[]>("SELECT * FROM Users WHERE id=?", "auth", [id]);

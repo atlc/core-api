@@ -1,5 +1,5 @@
 import * as mysql from "mysql";
-import { MySQL_Res } from "../../lib/types";
+import { MySQL_Res } from "../utils/types";
 import { sqlConfig } from "../config";
 
 const pools = mysql.createPoolCluster();
@@ -25,3 +25,4 @@ export const Query = <T = MySQL_Res>(query: string, poolToUse: string, values?: 
 export * as users from "./queries/users";
 export * as notes from "./queries/notes";
 export * as auth from "./queries/auth";
+export * as bills from "./queries/billtracker";

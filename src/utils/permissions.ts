@@ -1,6 +1,6 @@
 import * as passport from "passport";
 import { NextFunction, Response } from "express";
-import { RequestUser } from "../../lib/types";
+import { RequestUser } from "../utils/types";
 
 export const isUser = (req: RequestUser, res: Response, next: NextFunction) => {
     checkToken(req, res, next, "user");

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { RequestUser } from "../../../lib/types";
+import { RequestUser } from "../../utils/types";
 import { isAdmin, isUser } from "../../utils/permissions";
 import notesRouter from "./notes";
 import usersRouter from "./users";

@@ -1,5 +1,5 @@
 import * as dotenv from "dotenv";
-import { DBClusterConfig } from "../../lib/types";
+import { DBClusterConfig } from "../utils/types";
 
 dotenv.config();
 
@@ -31,10 +31,10 @@ export const sqlConfig: DBClusterConfig = {
         password: process.env[`${DEV_PREFACE}NOTES_DB_PASS`]
     },
     bill_tracker: {
-        database: process.env[`${DEV_PREFACE}BILLTRACK_DB_SCHEMA`],
-        host: process.env[`${DEV_PREFACE}BILLTRACK_DB_HOST`],
-        user: process.env[`${DEV_PREFACE}BILLTRACK_DB_USER`],
-        password: process.env[`${DEV_PREFACE}BILLTRACK_DB_PASS`]
+        database: process.env[`${DEV_PREFACE}BILL_DB_SCHEMA`],
+        host: process.env[`${DEV_PREFACE}BILL_DB_HOST`],
+        user: process.env[`${DEV_PREFACE}BILL_DB_USER`],
+        password: process.env[`${DEV_PREFACE}BILL_DB_PASS`]
     }
 };
 
