@@ -3,15 +3,9 @@ import * as db from "../../db";
 import { send_confirmation_email } from "../../services/registration_confirmation";
 import { validate_token } from "../../services/token_validator";
 import { checkIfValid } from "../../utils/isEmail";
+import { ReqWithQueryParams } from "../../utils/types";
 
 const router = express.Router();
-
-interface ReqWithQueryParams extends express.Request {
-    query: {
-        userid: string;
-        token: string;
-    };
-}
 
 router.post("/initiate", async (req: ReqWithQueryParams, res) => {
     try {

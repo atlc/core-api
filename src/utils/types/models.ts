@@ -34,6 +34,13 @@ export interface BillTypes {
     name: "internet" | "gas" | "electric" | "water";
 }
 
+export interface Tokens {
+    id: string;
+    user_id: string;
+    created_at: number;
+    expires_at: number;
+}
+
 export interface MySQL_Error {
     code?: string;
     errno?: number;

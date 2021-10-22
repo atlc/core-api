@@ -8,6 +8,13 @@ export interface TokenPayload {
     isVerified?: Users["verified"];
 }
 
+export interface ReqWithQueryParams extends Request {
+    query: {
+        userid: string;
+        token: string;
+    };
+}
+
 export interface ExtensibleHandler<
     P = core.ParamsDictionary,
     ResBody = any,
