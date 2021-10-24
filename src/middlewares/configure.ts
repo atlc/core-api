@@ -3,11 +3,10 @@ import * as passport from "passport";
 import * as morgan from "morgan";
 import * as compression from "compression";
 import * as helmet from "helmet";
-// import * as cors from 'cors';
+import * as cors from "cors";
 import "./passport-strategies";
 import * as config from "../config";
 
-// //@ts-ignore
 // const corsOptionsDelegate =  function (req, cb) {
 //   const corsOptions = {
 //     origin: false
@@ -26,5 +25,6 @@ export const configure = (app: express.Application) => {
     app.use(morgan("dev"));
     app.use(helmet());
     app.use(compression());
+    app.use(cors());
     // app.use(cors(corsOptionsDelegate));
 };
