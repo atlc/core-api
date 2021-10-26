@@ -14,7 +14,8 @@ export const mailgunConfig = {
     username: process.env.MAILGUN_USERNAME,
     email: process.env.MAILGUN_EMAIL,
     key: process.env.MAILGUN_KEY,
-    domain: process.env.MAILGUN_DOMAIN
+    domain: process.env.MAILGUN_DOMAIN,
+    receiving: process.env.MAILGUN_RECEIVING
 };
 
 export const sqlConfig: DBClusterConfig = {
