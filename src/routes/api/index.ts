@@ -6,6 +6,7 @@ import usersRouter from "./users";
 import contactRouter from "./contact";
 import kindleRouter from "./kindle";
 import billRouter from "./bills";
+import rhythm_and_bluesRouter from "./rhythm_and_blues";
 
 const router = Router();
 
@@ -27,5 +28,6 @@ router.use("/users", usersRouter);
 router.use("/contact", contactRouter);
 router.use("/kindle", isAdmin, kindleRouter);
 router.use("/bills", billRouter);
+router.use(["/rhythm_and_blues", "/hiphop", "/hip_hop", "/r&b"], rhythm_and_bluesRouter);
 
 export default router;
