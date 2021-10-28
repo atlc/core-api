@@ -27,7 +27,7 @@ router.get("/types", async (req, res, next) => {
     }
 });
 
-router.get("/", isAdmin, async (req, res, next) => {
+router.get("/", async (req, res, next) => {
     try {
         const bills = await db.bills.get_all();
         res.status(200).json(bills);
