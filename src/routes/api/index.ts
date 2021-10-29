@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { RequestUser } from "../../utils/types";
-import { isAdmin, isUser } from "../../utils/permissions";
+import { isAdmin, isFromApprovedDomain, isUser } from "../../utils/permissions";
 import notesRouter from "./notes";
 import usersRouter from "./users";
 import contactRouter from "./contact";
@@ -27,7 +27,7 @@ router.use("/notes", notesRouter);
 router.use("/users", usersRouter);
 router.use("/contact", contactRouter);
 router.use("/kindle", isAdmin, kindleRouter);
-router.use("/bills", billRouter);
+router.use("/bills", isFromApprovedDomain, billRouter);
 router.use(["/rhythm_and_blues", "/hiphop", "/hip_hop", "/r&b"], rhythm_and_bluesRouter);
 
 export default router;

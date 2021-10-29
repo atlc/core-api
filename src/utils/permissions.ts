@@ -1,6 +1,16 @@
 import * as passport from "passport";
+import { cors } from "../config";
 import { NextFunction, Response } from "express";
 import { RequestUser } from "../utils/types";
+
+export const isFromApprovedDomain = (req: RequestUser, res: Response, next: NextFunction) => {
+    const originating_domain = req.headers.origin;
+    const { approvedDomains } = cors;
+
+    if (!approvedDomains.includes(originating_domain)) return res.status(400).json({ message: "Unapproved domain." });
+
+    next();
+};
 
 export const isUser = (req: RequestUser, res: Response, next: NextFunction) => {
     checkToken(req, res, next, "user");
