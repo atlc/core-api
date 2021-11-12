@@ -34,8 +34,8 @@ export const send_with_attachments = (to: string, from: string, subject: string,
     });
 };
 
-export const send = (to: string, from: string, subject: string, text: unknown) => {
-    const data: { [key: string]: string | number | unknown } = { to, from, subject, text };
+export const send = (to: string, from: string, subject: string, text: unknown, tags: string[] = ["auth"]) => {
+    const data: { [key: string]: string | number | unknown } = { to, from, subject, text, "o:tag": tags };
 
     return new Promise(async (resolve, reject) => {
         try {

@@ -10,7 +10,8 @@ export const send_confirmation_email = async (
     email: string,
     from: string = "registration@atlc.dev",
     subject: string = "Please Confirm Your Account",
-    url_path: string = "verify"
+    url_path: string = "verify",
+    tags: string[] = [""]
 ) => {
     const registration_token = uuid();
 
@@ -23,5 +24,5 @@ export const send_confirmation_email = async (
         user_id: userid
     });
 
-    send(email, from, subject, `${URL_BASE}/auth/${url_path}/?userid=${userid}&token=${registration_token}`);
+    send(email, from, subject, `${URL_BASE}/auth/${url_path}/?userid=${userid}&token=${registration_token}`, tags);
 };

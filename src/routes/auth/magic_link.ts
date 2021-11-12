@@ -19,7 +19,7 @@ router.post("/initiate", async (req, res, next) => {
 
         if (!user) return res.status(400).json({ message: "Invalid credentials" });
 
-        send_confirmation_email(user.id, user.email, "magic_link@atlc.dev", "Magic Link Login", "magic_link");
+        send_confirmation_email(user.id, user.email, "magic_link@atlc.dev", "Magic Link Login", "magic_link", ["magic link", "auth"]);
 
         res.status(200).json({ message: "Check your email for your magic link" });
     } catch (error) {
@@ -30,6 +30,8 @@ router.post("/initiate", async (req, res, next) => {
 router.get("/", async (req: ReqWithQueryParams, res, next) => {
     try {
         const { userid, token } = req.query;
+
+        console.log({ userid, token });
 
         const [user] = await db.users.single(userid);
 
