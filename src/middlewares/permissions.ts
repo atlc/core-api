@@ -7,7 +7,7 @@ export const isFromApprovedDomain = (req: RequestUser, res: Response, next: Next
     const originating_domain = req.headers.origin;
     const { approvedDomains } = cors;
 
-    if (!approvedDomains.includes(originating_domain)) return res.status(400).json({ message: "Unapproved domain." });
+    if (!approvedDomains.includes(originating_domain)) return res.status(401).json({ message: "Unapproved domain." });
 
     next();
 };
@@ -27,14 +27,16 @@ export const isSuperadmin = (req: RequestUser, res: Response, next: NextFunction
 const checkToken = (req: RequestUser, res: Response, next: NextFunction, role: string) => {
     passport.authenticate("jwt", { session: false }, (err, user, info) => {
         if (err) return next(err);
+
         if (info)
             return res.status(401).json({
                 message: "There was an error while authenticating, please make sure you try logging in again before retrying.",
                 error: info.message
             });
+
         if (!user)
             return res
-                .status(503)
+                .status(500)
                 .json({ message: "There was an unknown error while authenticating user session, please try again later." });
 
         if (user) req.user = user;

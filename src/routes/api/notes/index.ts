@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { Note, RequestUser } from "../../../utils/types";
-import { isUser } from "../../../utils/permissions";
+import { HTTPError, Note, RequestUser } from "../../../utils/types";
+import { isUser } from "../../../middlewares/permissions";
 import { notes } from "../../../db";
 import { v4 as uuid_v4 } from "uuid";
 
@@ -12,7 +12,9 @@ router.get("/profile", isUser, async (req: RequestUser, res, next) => {
         const user_notes = await notes.get_notes_by_user(user_id);
         res.json(user_notes);
     } catch (error) {
-        next(error);
+        const pizza: HTTPError = new Error(`LOL: ${error}`);
+        pizza.status = 403;
+        next(pizza);
     }
 });
 

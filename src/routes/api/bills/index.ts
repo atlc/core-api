@@ -1,7 +1,7 @@
 import { Router } from "express";
 import * as db from "../../../db";
 import { Bills } from "../../../utils/types";
-import { isAdmin } from "../../../utils/permissions";
+import { isAdmin } from "../../../middlewares/permissions";
 import { mailgunConfig, cors } from "../../../config";
 
 const router = Router();

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { isAdmin } from "../../../utils/permissions";
+import { isAdmin } from "../../../middlewares/permissions";
 import * as https from "https";
 import * as path from "path";
 import * as fs from "fs";

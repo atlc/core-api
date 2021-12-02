@@ -1,6 +1,6 @@
 import e, { Router } from "express";
 import { RequestUser, Users } from "../../../utils/types";
-import { isUser } from "../../../utils/permissions";
+import { isUser } from "../../../middlewares/permissions";
 import { users } from "../../../db";
 
 const router = Router();

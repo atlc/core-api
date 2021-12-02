@@ -1,7 +1,7 @@
 import * as express from "express";
 import { mailgunConfig, cors } from "../../../config";
 import { send } from "../../../services/mailer";
-import { isAdmin } from "../../../utils/permissions";
+import { isAdmin } from "../../../middlewares/permissions";
 
 const router = express.Router();
 

@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { RequestUser } from "../../utils/types";
-import { isAdmin, isFromApprovedDomain, isUser } from "../../utils/permissions";
+import { isAdmin, isFromApprovedDomain, isUser } from "../../middlewares/permissions";
 import notesRouter from "./notes";
 import usersRouter from "./users";
 import contactRouter from "./contact";
