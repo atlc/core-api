@@ -49,4 +49,10 @@ export const kindle = {
     from: process.env.KINDLE_APPROVED
 };
 
+export const twilio = {
+    account_sid: process.env.TWILIO_ACCT_SID,
+    auth_token: process.env.TWILIO_AUTH_TOKEN,
+    phone_number: process.env.TWILIO_NUMBER
+};
+
 export const URL_BASE = process.env[`${DEV_PREFACE}URL_BASE`];

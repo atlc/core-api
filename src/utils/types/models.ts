@@ -10,6 +10,9 @@ export interface Users {
     verified: number;
     created_at: string;
     updated_at: string;
+    sms_enabled: number;
+    sms_verified: number;
+    phone_number: string;
 }
 
 export interface Note {
@@ -35,6 +38,13 @@ export interface BillTypes {
 }
 
 export interface Tokens {
+    id: string;
+    user_id: string;
+    created_at: number;
+    expires_at: number;
+}
+
+export interface SMSCodes {
     id: string;
     user_id: string;
     created_at: number;

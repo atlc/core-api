@@ -6,6 +6,9 @@ export interface TokenPayload {
     id?: Users["id"];
     roles?: Users["roles"];
     isVerified?: Users["verified"];
+    sms_enabled?: Users["sms_enabled"];
+    sms_verified?: Users["sms_verified"];
+    phone_number?: Users["phone_number"];
 }
 
 export interface ReqWithQueryParams extends Request {
