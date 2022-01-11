@@ -23,6 +23,32 @@ router.get("/status/auth", isUser, (req: RequestUser, res) => {
     });
 });
 
+router.get("/fizzBuzz", (req, res) => {
+    const start = Number(req.query.start) || 1;
+    const stop = Number(req.query.stop) || 100;
+    const primeOne = Number(req.query.primeOne) || 3;
+    const primeTwo = Number(req.query.primeTwo) || 5;
+    const product = primeOne * primeTwo;
+    const wordOne = req.query.wordOne || "Fizz";
+    const wordTwo = req.query.wordTwo || "Buzz";
+    const wordThree = req.query.wordThree || "FizzBuzz";
+
+    const solution = [];
+
+    for (let i = start; i <= stop; i++) {
+        if (i % product === 0) {
+            solution.push(wordThree);
+        } else if (i % primeOne === 0) {
+            solution.push(wordOne);
+        } else if (i % primeTwo === 0) {
+            solution.push(wordTwo);
+        } else {
+            solution.push(i);
+        }
+    }
+    res.json(solution);
+});
+
 router.use("/notes", notesRouter);
 router.use("/users", usersRouter);
 router.use("/contact", contactRouter);
