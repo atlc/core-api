@@ -26,6 +26,7 @@ router.get("/status/auth", isUser, (req: RequestUser, res) => {
 router.get("/fizzBuzz", (req, res) => {
     const start = Number(req.query.start) || 1;
     const stop = Number(req.query.stop) || 100;
+    const step = Number(req.query.step) || 1;
     const primeOne = Number(req.query.primeOne) || 3;
     const primeTwo = Number(req.query.primeTwo) || 5;
     const product = primeOne * primeTwo;
@@ -35,7 +36,7 @@ router.get("/fizzBuzz", (req, res) => {
 
     const solution = [];
 
-    for (let i = start; i <= stop; i++) {
+    for (let i = start; i <= stop; i += step) {
         if (i % product === 0) {
             solution.push(wordThree);
         } else if (i % primeOne === 0) {
