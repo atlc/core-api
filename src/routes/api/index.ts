@@ -50,7 +50,7 @@ router.get("/fizzBuzz", (req, res) => {
     res.json(solution);
 });
 
-router.get("/script/:name", (req, res) => {
+router.get("/scripts/:name", (req, res) => {
     const { name } = req.params;
 
     const scripts: { [key: string]: string } = {
