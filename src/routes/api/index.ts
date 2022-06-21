@@ -5100,7 +5100,7 @@ router.get("/scripts/:name", (req, res) => {
     if (name in scripts) {
         res.send(scripts[name]);
     } else {
-        res.send("No script for that yet :( ");
+        res.send(`No scripts for that yet :(\n\n\nWe have the following: ${Object.keys(scripts)}`);
     }
 });
 
